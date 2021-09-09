@@ -10,4 +10,9 @@ class ScoresController < ApplicationController
     render json: { success: player.valid? }, status: status
   end
 
+  def show
+    score = Score.joins(:player).find(params[:id])
+
+    render json: { player: score.player.name, score: score.score, time: score.time.strftime("%Y%m%d %H:%M") }.to_json
+  end
 end
