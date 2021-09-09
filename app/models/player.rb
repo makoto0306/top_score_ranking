@@ -1,14 +1,12 @@
 class Player < ApplicationRecord
   has_many :scores
-  accepts_nested_attributes_for :scores
-
   validates :name, presence: true
 
-  before_save :downcase_name
+  before_save :capitalize_name
 
   private
 
-  def downcase_name
-    self.name = name.downcase
+  def capitalize_name
+    self.name = name.capitalize
   end
 end
