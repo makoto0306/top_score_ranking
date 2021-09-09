@@ -36,4 +36,16 @@ RSpec.describe "Scores", type: :request do
       end
     end
   end
+
+  describe "DELETE /destroy" do
+    it "deletes scores by id" do
+      headers = { "ACCEPT" => "application/json" }
+      player = Player.create(name: "Edo")
+      current_time = Time.current.strftime("%Y%m%d %H:%M")
+      score = player.scores.create(score: 100, time: current_time)
+      delete score_url(score.id), :headers => headers
+
+      expect(Score).to_not exist
+    end
+  end
 end

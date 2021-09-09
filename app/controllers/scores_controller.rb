@@ -15,4 +15,8 @@ class ScoresController < ApplicationController
 
     render json: { player: score.player.name, score: score.score, time: score.time.strftime("%Y%m%d %H:%M") }.to_json
   end
+
+  def destroy
+    Score.find(params[:id]).destroy
+  end
 end
