@@ -13,7 +13,7 @@ docker-compose build
 3. Create Database
 
 ```
- docker-compose run web rake db:migrate
+ docker-compose run web rake db:create db:migrate
 ```
 
 4. Run Application
