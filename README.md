@@ -1,32 +1,26 @@
-1. Create Application
-
-```
-$ docker-compose run web rails new . --force --no-deps --database=mysql --skip-test --webpacker
-```
-
-2. Build Docker
+1. Build Docker
 
 ```
 $ docker-compose build
 ```
 
-3. Create Database
+2. Create Database
 
 ```
  $ docker-compose run web rake db:create db:migrate
 ```
 
-4. Run Application
+3. Run Application
 
 ```
  $ docker-compose up -d
 ```
 
-5. Create Score
+4. Create Score
 
 ```
 $ curl -X POST http://localhost:3000/scores -d 'player=EDO' -d 'score=100' -d 'time=2020-09-10 14:00'
-$ curl -X POST http://localhost:3000/scores -d 'player=EDO' -d 'score=300' -d 'time=2020-09-11 9:00
+$ curl -X POST http://localhost:3000/scores -d 'player=EDO' -d 'score=300' -d 'time=2020-09-11 9:00'
 $ curl -X POST http://localhost:3000/scores -d 'player=Osaka' -d 'score=400' -d 'time=2020-09-13 9:00'
 $ curl -X POST http://localhost:3000/scores -d 'player=Osaka' -d 'score=280' -d 'time=2020-09-11 9:00'
 ```
