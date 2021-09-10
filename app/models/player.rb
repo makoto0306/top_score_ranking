@@ -4,6 +4,10 @@ class Player < ApplicationRecord
 
   before_save :capitalize_name
 
+  def average_score
+    scores.sum { |s| s.score } * 1.0 / scores.count
+  end
+
   private
 
   def capitalize_name
