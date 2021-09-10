@@ -26,7 +26,7 @@ $ curl -X POST http://localhost:3000/scores -d 'player=Osaka' -d 'score=280' -d 
 ```
 
 5. Get Score
-   You can find id out from list of scores.
+- You can find id out from list of scores.
 
 ```
 $ curl -X GET http://localhost:3000/scores/2
@@ -39,7 +39,7 @@ $ curl -X GET http://localhost:3000/scores -d 'players=osaka,edo' -d 'before=202
 
 
 7. Delete Score
-   You can find id out from list of scores
+- You can find id out from list of scores
 
 ```
 $ curl -X DELETE http://localhost:3000/scores/2
