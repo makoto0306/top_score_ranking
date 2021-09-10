@@ -4,46 +4,47 @@ RSpec.describe Score, :type => :model do
 
   describe '.filter' do
     before do
-      @currentTime = Time.current
       player1 = Player.create(name: 'Player1')
-      score1 = Score.create(player:  player1 , score: 10, time: @currentTime)
-      score2 = Score.create(player:  player1 , score: 30, time: @currentTime + 2000)
+      score1 = Score.create(player:  player1 , score: 10, time: Time.zone.local(2021, 9, 10, 10))
+      score2 = Score.create(player:  player1 , score: 30, time: Time.zone.local(2021, 9, 12, 8))
 
       player2 = Player.create(name: 'Player2')
-      score3 = Score.create(player: player2 , score: 90, time: @currentTime + 1000)
-      score4 = Score.create(player: player2 , score: 80, time: @currentTime + 3000)
+      score3 = Score.create(player: player2 , score: 90, time: Time.zone.local(2021, 9, 11, 19))
+      score4 = Score.create(player: player2 , score: 80, time: Time.zone.local(2021, 9, 13, 10))
     end
 
-    it 'filter by player names' do
-      results = Score.filter(players: ['Player2'])
-      expect(results.count).to eq 2
-      expect(results.first.player.name).to eq 'Player2'
-      expect(results.last.player.name).to eq 'Player2'
+
+    context 'filter by player names' do
+      it 'filter by specific player' do
+        results = Score.filter(players: ['Player2'])
+        expect(results.count).to eq 2
+        expect(results.first.player.name).to eq 'Player2'
+        expect(results.last.player.name).to eq 'Player2'
+      end
     end
 
     it 'filter by only before time' do
-      results = Score.filter(before: @currentTime + 1010)
+      results = Score.filter(before: '2021-09-12')
       expect(results.count).to eq 2
 
-      results = Score.filter(before: @currentTime + 2010)
+      results = Score.filter(before: '2021-09-13')
       expect(results.count).to eq 3
     end
 
     it 'filter by only after time' do
-      results = Score.filter(after: @currentTime - 1)
+      results = Score.filter(after: '2021-09-09')
       expect(results.count).to eq 4
 
-      results = Score.filter(after: @currentTime + 1900)
+      results = Score.filter(after: '2021-09-11')
       expect(results.count).to eq 2
-
     end
 
     it 'filter by before time and after time' do
-      results = Score.filter(after: @currentTime - 1, before: @currentTime + 999)
+      results = Score.filter(after: '2021-09-09', before: '2021-09-11')
       expect(results.count).to eq 1
       expect(results.last.score).to eq 10
 
-      results = Score.filter(after: @currentTime + 1000, before: @currentTime + 2000)
+      results = Score.filter(after: '2021-09-11', before: '2021-09-13')
       expect(results.count).to eq 1
       expect(results.last.score).to eq 30
     end

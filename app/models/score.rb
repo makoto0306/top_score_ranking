@@ -13,8 +13,8 @@ class Score < ApplicationRecord
     players = Player.where(name: players)
     result = Score.all.order(:id)
     result = result.where(player: players.ids) if players.present?
-    result = result.where('time < ?', before) if before.present?
-    result = result.where('time > ?', after) if after.present?
+    result = result.where('time < ?', before.to_datetime) if before.present?
+    result = result.where('time > ?', after.to_datetime.end_of_day) if after.present?
 
     if page.present?  && limit.present?
       offset = limit * (page - 1)
