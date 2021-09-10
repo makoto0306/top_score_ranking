@@ -12,9 +12,6 @@ RSpec.describe Score, :type => :model do
       player2 = Player.create(name: 'Player2')
       score3 = Score.create(player: player2 , score: 90, time: @currentTime + 1000)
       score4 = Score.create(player: player2 , score: 80, time: @currentTime + 3000)
-
-
-      # arguments is, multiple names, before, after, offset, limit
     end
 
     it 'filter by player names' do
