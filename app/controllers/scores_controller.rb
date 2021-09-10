@@ -2,7 +2,7 @@ class ScoresController < ApplicationController
 
   def index
     scores = Score.filter(
-      players: params[:players],
+      players: params[:players].split(","),
       before: params[:before],
       after: params[:after],
       page: params[:page],

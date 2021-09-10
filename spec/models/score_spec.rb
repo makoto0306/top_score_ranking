@@ -16,7 +16,7 @@ RSpec.describe Score, :type => :model do
 
     context 'filter by player names' do
       it 'filter by specific player' do
-        results = Score.filter(players: ['Player2'])
+        results = Score.filter(players: ['PLAYER2'])
         expect(results.count).to eq 2
         expect(results.first.player.name).to eq 'Player2'
         expect(results.last.player.name).to eq 'Player2'
@@ -50,10 +50,10 @@ RSpec.describe Score, :type => :model do
     end
 
     it 'filter by page and limit' do
-      results = Score.filter(limit: 1, page: 3)
+      results = Score.filter(limit: "1", page: "3")
       expect(results.first.score).to eq Score.order(:id).third.score
 
-      results = Score.filter(limit: 3, page: 2)
+      results = Score.filter(limit: "3", page: "2")
       expect(results.first.score).to eq Score.order(:id).fourth.score
     end
   end

@@ -15,7 +15,7 @@ RSpec.describe "Scores", type: :request do
 
     it "gets scores filtered by parameters" do
       params = {
-        players: [@score3.player.name],
+        players: [@score3.player.name, "abc"].join,
         before: '2021-09-13'
       }
       get scores_url, params: params, headers: { "ACCEPT" => "application/json" }
@@ -52,7 +52,7 @@ RSpec.describe "Scores", type: :request do
     context "valid" do
       it 'responds created' do
         headers = { "ACCEPT" => "application/json" }
-        post "/scores", params: { player: "Edo", score: 21, time: "2021-09-09 09:09:09"}, :headers => headers
+        post "/scores", params: { player: "Edo", score: "21", time: "2021-09-09 09:09:09"}, :headers => headers
 
         expect(response.content_type).to eq("application/json; charset=utf-8")
         expect(response).to have_http_status(:created)
